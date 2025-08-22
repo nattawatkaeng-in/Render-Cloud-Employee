@@ -1,6 +1,6 @@
-﻿click==8.1.7
-greenlet==2.0.1
-itsdangerous==2.2.0
+click==8.1.7
+greenlet>=2.4.1
+itsdangerous>=2.2.0
 Jinja2==3.1.2
 MarkupSafe==2.1.1
 psycopg2-binary==2.9.10
@@ -8,4 +8,4 @@ Flask==3.1.2
 Flask-SQLAlchemy==3.1.1
 Werkzeug>=3.1.0
 gunicorn==23.0.0
-SQLAlchemy==2.0.34
+SQLAlchemy>=2.0.34
