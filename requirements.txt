@@ -4,9 +4,8 @@ itsdangerous==2.2.0
 Jinja2==3.1.2
 MarkupSafe==2.1.1
 psycopg2-binary==2.9.10
-Flask>=3.1.2
+Flask==3.1.2
 Flask-SQLAlchemy==3.1.1
-Werkzeug==3.1.0
+Werkzeug>=3.1.0
 gunicorn==23.0.0
-
 SQLAlchemy==2.0.34
