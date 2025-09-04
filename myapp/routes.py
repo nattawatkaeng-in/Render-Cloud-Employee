@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for
+from flask import Blueprint, redirect, url_for, render_template
 
 
 from .extensions import db
@@ -8,9 +8,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    users = User.query.all()
-    users_list_html = [f"<li>{ user.username }</li>" for user in users]
-    return f"<ul>{''.join(users_list_html)}</ul>"
+    return render_template("index.html")
 
 @main.route('/add/<username>')
 def add_user(username):
