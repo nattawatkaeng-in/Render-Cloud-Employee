@@ -6,23 +6,14 @@ from .models import User
 
 main = Blueprint('main', __name__, template_folder='templates')
 
-@main.route('/')
+@main.route('/') 
 def index():
-    return render_template("index.html")
+	users = User.query.all()
+	users_list_html = [f"<li>{ user.username }</li>" for user in users]
+	return f"<ul>{''.join(users_list_html)}</ul>"
 
-@main.route('/api/users', methods=['GET'])
-def get_users():
-    users = User.query.all()
-    users_list = [{"id": user.id, "username": user.username} for user in users]
-    return jsonify(users_list)
-
-@main.route('/api/users/add', methods=['POST'])
-def add_user_api():
-    data = request.get_json()  # {"username": "newuser"}
-    if not data or "username" not in data:
-        return jsonify({"error": "Missing username"}), 400
-
-    new_user = User(username=data["username"])
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify({"message": "User added", "id": new_user.id})
+@main.route('/add/<username>')
+def add_user(username):
+	db.session.add(User(username=username))
+	db.session.commit()
+	return redirect(url_for("main.index"))
