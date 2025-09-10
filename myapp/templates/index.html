@@ -2,20 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User List</title>
+    <title>Employee Manager</title>
 </head>
 <body>
-    <h1>User List</h1>
-    <ul>
-        {% for user in users %}
-            <li>{{ user.username }}</li>
-        {% endfor %}
-    </ul>
+    <h1>Employee List</h1>
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Position</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees %}
+            <tr>
+                <td>{{ emp.employee_id }}</td>
+                <td>{{ emp.first_name }}</td>
+                <td>{{ emp.last_name }}</td>
+                <td>{{ emp.email }}</td>
+                <td>{{ emp.phone }}</td>
+                <td>{{ emp.position }}</td>
+                <td>{{ emp.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>{{ emp.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-    <h2>Add User</h2>
-    <form action="{{ url_for('main.add_user') }}" method="POST">
-        <input type="text" name="username" placeholder="Enter username" required>
-        <button type="submit">Add</button>
+    <h2>Add New Employee</h2>
+    <form action="{{ url_for('main.add_employee') }}" method="POST">
+        <input type="text" name="first_name" placeholder="First Name" required>
+        <input type="text" name="last_name" placeholder="Last Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="phone" placeholder="Phone">
+        <input type="text" name="position" placeholder="Position">
+        <button type="submit">Add Employee</button>
     </form>
 </body>
 </html>
