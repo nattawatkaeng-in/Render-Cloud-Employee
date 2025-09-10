@@ -90,6 +90,21 @@ form button:hover {
     background-color: #2980b9;
 }
 
+.btn-edit {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #3498db; /* สีฟ้าเหมือนปุ่ม Delete */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-edit:hover {
+    background-color: #2980b9;
+}
+
 /* Footer */
 footer {
     text-align: center;
