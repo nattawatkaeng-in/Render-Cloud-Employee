@@ -79,7 +79,7 @@ form button {
     padding: 10px 20px;
     border: none;
     border-radius: 6px;
-    background-color: #3498db;
+    background-color: #DB3434;
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -87,14 +87,14 @@ form button {
 }
 
 form button:hover {
-    background-color: #2980b9;
+    background-color: #B92929;
 }
 
 .btn-edit {
     padding: 10px 20px;
     border: none;
     border-radius: 6px;
-    background-color: #3498db; /* สีฟ้าเหมือนปุ่ม Delete */
+    background-color: #DBDB34; /* สีฟ้าเหมือนปุ่ม Delete */
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -102,8 +102,53 @@ form button:hover {
 }
 
 .btn-edit:hover {
-    background-color: #2980b9;
+    background-color: #B9B929;
 }
+
+/* พื้นหลังมืดลง */
+.modal {
+  display: none; /* ซ่อนเริ่มต้น */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6); /* พื้นหลังโปร่งมืด */
+}
+
+/* กล่องเนื้อหา */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+/* ปุ่มปิด (X) */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+/* เอฟเฟกต์ Fade In */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 /* Footer */
 footer {

@@ -21,8 +21,8 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>ชื่อ</th>
-          <th>นามสกุล</th>
+          <th>First Name</th>
+          <th>Last Name</th>
           <th>Email</th>
           <th>Phone</th>
           <th>Position</th>
@@ -52,12 +52,12 @@
               data-phone="{{ emp.phone }}"
               data-position="{{ emp.position }}"
               onclick="openEditModal(this)">
-              แก้ไข
+              Edit
             </button>
 
             <!-- ปุ่มลบ -->
             <form action="{{ url_for('main.delete_employee', employee_id=emp.employee_id) }}" method="POST" style="display:inline;" onsubmit="return confirm('คุณแน่ใจหรือไม่ที่จะลบ?');">
-              <button type="submit" class="btn-delete">ลบ</button>
+              <button type="submit" class="btn-delete">Delete</button>
             </form>
           </td>
         </tr>
@@ -69,14 +69,14 @@
     <div id="editModal" class="modal" style="display:none;">
       <div class="modal-content">
         <span class="close" onclick="closeEditModal()">&times;</span>
-        <h2>แก้ไขข้อมูลพนักงาน</h2>
+        <h2>Employee edit</h2>
         <form id="editForm" method="POST">
           <input type="text" name="first_name" id="edit_first_name" required>
           <input type="text" name="last_name" id="edit_last_name" required>
           <input type="email" name="email" id="edit_email" required>
           <input type="text" name="phone" id="edit_phone" required>
           <input type="text" name="position" id="edit_position" required>
-          <button type="submit">บันทึก</button>
+          <button type="submit">Save</button>
         </form>
       </div>
     </div>
@@ -107,4 +107,30 @@
     </script>
 
 </body>
+<!-- Modal แก้ไข -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeEditModal()">&times;</span>
+    <h2>Employee edit</h2>
+    <form id="editForm" method="POST">
+      <label>First Name:</label>
+      <input type="text" id="edit_first_name" name="first_name" required><br>
+
+      <label>Last Name:</label>
+      <input type="text" id="edit_last_name" name="last_name" required><br>
+
+      <label>Email:</label>
+      <input type="email" id="edit_email" name="email" required><br>
+
+      <label>Phoneร:</label>
+      <input type="text" id="edit_phone" name="phone" required><br>
+
+      <label>Position:</label>
+      <input type="text" id="edit_position" name="position" required><br>
+
+      <button type="submit" class="btn-edit">Save</button>
+      <button type="button" onclick="closeEditModal()">Cancel</button>
+    </form>
+  </div>
+</div>
 </html>
