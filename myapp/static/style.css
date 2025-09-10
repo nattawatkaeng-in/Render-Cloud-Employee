@@ -94,7 +94,7 @@ form button:hover {
     padding: 10px 20px;
     border: none;
     border-radius: 6px;
-    background-color: #FFFF00; /* สีฟ้าเหมือนปุ่ม Delete */
+    background-color: #F6C23E; /* สีฟ้าเหมือนปุ่ม Delete */
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -102,7 +102,7 @@ form button:hover {
 }
 
 .btn-edit:hover {
-    background-color: #D9D900;
+    background-color: #D6A324;
 }
 
 .btn-delete {
