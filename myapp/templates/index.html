@@ -34,6 +34,7 @@
       <tbody>
         {% for emp in employees %}
         <tr>
+          <!-- ฟอร์มแก้ไข -->
           <form action="{{ url_for('main.edit_employee', employee_id=emp.employee_id) }}" method="POST">
             <td>{{ emp.employee_id }}</td>
             <td><input type="text" name="first_name" value="{{ emp.first_name }}"></td>
@@ -44,13 +45,15 @@
             <td>{{ emp.created_at }}</td>
             <td>{{ emp.updated_at }}</td>
             <td>
-              <button type="submit">ยืนยัน</button>
+              <button type="submit" class="btn-edit">ยืนยัน</button>
               <a href="{{ url_for('main.index') }}">ยกเลิก</a>
-              <form action="{{ url_for('main.delete_employee', employee_id=emp.employee_id) }}" method="POST" onsubmit="return confirm('คุณแน่ใจหรือไม่ที่จะลบ?');">
-                <button type="submit">ลบ</button>
+          </form>
+
+          <!-- ฟอร์มลบ -->
+              <form action="{{ url_for('main.delete_employee', employee_id=emp.employee_id) }}" method="POST" style="display:inline;" onsubmit="return confirm('คุณแน่ใจหรือไม่ที่จะลบ?');">
+                <button type="submit" class="btn-delete">ลบ</button>
               </form>
             </td>
-          </form>
         </tr>
         {% endfor %}
       </tbody>
