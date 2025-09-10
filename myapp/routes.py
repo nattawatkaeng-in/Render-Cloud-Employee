@@ -35,7 +35,6 @@ def add_employee():
 def edit_employee(employee_id):
     employee = Employee.query.get_or_404(employee_id)
 
-    # อัปเดตเฉพาะฟิลด์ที่แก้ไขได้
     employee.first_name = request.form.get("first_name")
     employee.last_name = request.form.get("last_name")
     employee.email = request.form.get("email")
@@ -45,7 +44,6 @@ def edit_employee(employee_id):
 
     db.session.commit()
     return redirect(url_for("main.index"))
-
 
 @main.route('/delete/<int:employee_id>', methods=["POST"])
 def delete_employee(employee_id):
