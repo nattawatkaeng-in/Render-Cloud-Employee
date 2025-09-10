@@ -34,14 +34,12 @@ def add_employee():
 @main.route('/edit/<int:employee_id>', methods=["POST"])
 def edit_employee(employee_id):
     employee = Employee.query.get_or_404(employee_id)
-
     employee.first_name = request.form.get("first_name")
     employee.last_name = request.form.get("last_name")
     employee.email = request.form.get("email")
     employee.phone = request.form.get("phone")
     employee.position = request.form.get("position")
-    employee.updated_at = datetime.utcnow()
-
+    employee.updated_at = datetime.utcnow()  # อัปเดตเวลาล่าสุด
     db.session.commit()
     return redirect(url_for("main.index"))
 
