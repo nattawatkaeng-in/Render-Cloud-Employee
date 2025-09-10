@@ -34,29 +34,77 @@
       <tbody>
         {% for emp in employees %}
         <tr>
-          <!-- ฟอร์มแก้ไข -->
-          <form action="{{ url_for('main.edit_employee', employee_id=emp.employee_id) }}" method="POST">
-            <td>{{ emp.employee_id }}</td>
-            <td><input type="text" name="first_name" value="{{ emp.first_name }}"></td>
-            <td><input type="text" name="last_name" value="{{ emp.last_name }}"></td>
-            <td><input type="email" name="email" value="{{ emp.email }}"></td>
-            <td><input type="text" name="phone" value="{{ emp.phone }}"></td>
-            <td><input type="text" name="position" value="{{ emp.position }}"></td>
-            <td>{{ emp.created_at }}</td>
-            <td>{{ emp.updated_at }}</td>
-            <td>
-              <button type="submit" class="btn-edit">ยืนยัน</button>
-              <a href="{{ url_for('main.index') }}">ยกเลิก</a>
-          </form>
+          <td>{{ emp.employee_id }}</td>
+          <td>{{ emp.first_name }}</td>
+          <td>{{ emp.last_name }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.phone }}</td>
+          <td>{{ emp.position }}</td>
+          <td>{{ emp.created_at }}</td>
+          <td>{{ emp.updated_at }}</td>
+          <td>
+            <!-- ปุ่มแก้ไข -->
+            <button type="button" class="btn-edit"
+              data-id="{{ emp.employee_id }}"
+              data-first="{{ emp.first_name }}"
+              data-last="{{ emp.last_name }}"
+              data-email="{{ emp.email }}"
+              data-phone="{{ emp.phone }}"
+              data-position="{{ emp.position }}"
+              onclick="openEditModal(this)">
+              แก้ไข
+            </button>
 
-          <!-- ฟอร์มลบ -->
-              <form action="{{ url_for('main.delete_employee', employee_id=emp.employee_id) }}" method="POST" style="display:inline;" onsubmit="return confirm('คุณแน่ใจหรือไม่ที่จะลบ?');">
-                <button type="submit" class="btn-delete">ลบ</button>
-              </form>
-            </td>
+            <!-- ปุ่มลบ -->
+            <form action="{{ url_for('main.delete_employee', employee_id=emp.employee_id) }}" method="POST" style="display:inline;" onsubmit="return confirm('คุณแน่ใจหรือไม่ที่จะลบ?');">
+              <button type="submit" class="btn-delete">ลบ</button>
+            </form>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
+
+    <!-- 🔹 Modal Popup -->
+    <div id="editModal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h2>แก้ไขข้อมูลพนักงาน</h2>
+        <form id="editForm" method="POST">
+          <input type="text" name="first_name" id="edit_first_name" required>
+          <input type="text" name="last_name" id="edit_last_name" required>
+          <input type="email" name="email" id="edit_email" required>
+          <input type="text" name="phone" id="edit_phone" required>
+          <input type="text" name="position" id="edit_position" required>
+          <button type="submit">บันทึก</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function openEditModal(button) {
+        const id = button.getAttribute("data-id");
+        const firstName = button.getAttribute("data-first");
+        const lastName = button.getAttribute("data-last");
+        const email = button.getAttribute("data-email");
+        const phone = button.getAttribute("data-phone");
+        const position = button.getAttribute("data-position");
+
+        document.getElementById("edit_first_name").value = firstName;
+        document.getElementById("edit_last_name").value = lastName;
+        document.getElementById("edit_email").value = email;
+        document.getElementById("edit_phone").value = phone;
+        document.getElementById("edit_position").value = position;
+        document.getElementById("editForm").action = "/edit/" + id;
+
+        document.getElementById("editModal").style.display = "block";
+      }
+
+
+      function closeEditModal() {
+        document.getElementById("editModal").style.display = "none";
+      }
+    </script>
+
 </body>
 </html>
