@@ -6,7 +6,7 @@ class User(db.Model):
     username = db.Column(db.String(50))
     
 class Employee(db.Model):
-    __tablename__ = "employees"  # ชื่อตาราง (ไม่ใส่ก็ได้ จะ default ตาม class name)
+    __tablename__ = "employees"
 
     employee_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.String(50), nullable=False)
