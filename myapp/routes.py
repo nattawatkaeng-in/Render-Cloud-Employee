@@ -10,6 +10,32 @@ def index():
     employees = Employee.query.all()
     return render_template("index.html", employees=employees)
 
+@main.route('/api/employees/search')
+def search_employees():
+    query = request.args.get("q", "").lower()
+    employees = Employee.query.filter(
+        (Employee.first_name.ilike(f"%{query}%")) |
+        (Employee.last_name.ilike(f"%{query}%")) |
+        (Employee.email.ilike(f"%{query}%")) |
+        (Employee.phone.ilike(f"%{query}%")) |
+        (Employee.position.ilike(f"%{query}%"))
+    ).all()
+
+    results = [
+        {
+            "id": emp.employee_id,
+            "first_name": emp.first_name,
+            "last_name": emp.last_name,
+            "email": emp.email,
+            "phone": emp.phone,
+            "position": emp.position,
+            "created_at": emp.created_at,
+            "updated_at": emp.updated_at,
+        }
+        for emp in employees
+    ]
+    return jsonify(results)
+
 @main.route('/add', methods=["POST"])
 def add_employee():
     first_name = request.form.get("first_name")

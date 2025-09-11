@@ -17,7 +17,7 @@
         <button type="submit">Add Employee</button>
     </form>
     <div style="text-align: right; margin-bottom: 10px;">
-      <input type="text" id="searchInput" placeholder="ค้นหา..." onkeyup="searchTable()" />
+      <input type="text" id="searchInput" placeholder="ค้นหา..." onkeyup="searchEmployees()" />
     </div>
     <table>
       <thead>
@@ -109,17 +109,44 @@
     </script>
 
     <script>
-      function searchTable() {
-        let input = document.getElementById("searchInput").value.toLowerCase();
-        let rows = document.querySelectorAll("table tbody tr");
+      async function searchEmployees() {
+        let query = document.getElementById("searchInput").value;
+        let response = await fetch(`/api/employees/search?q=${query}`);
+        let data = await response.json();
 
-        rows.forEach(row => {
-          let text = row.innerText.toLowerCase();
-          row.style.display = text.includes(input) ? "" : "none";
+        let tbody = document.querySelector("table tbody");
+        tbody.innerHTML = "";
+
+        data.forEach(emp => {
+          tbody.innerHTML += `
+            <tr>
+              <td>${emp.id}</td>
+              <td>${emp.first_name}</td>
+              <td>${emp.last_name}</td>
+              <td>${emp.email}</td>
+              <td>${emp.phone}</td>
+              <td>${emp.position}</td>
+              <td>${emp.created_at}</td>
+              <td>${emp.updated_at}</td>
+              <td>
+                <button type="button" class="btn-edit"
+                  data-id="${emp.id}"
+                  data-first="${emp.first_name}"
+                  data-last="${emp.last_name}"
+                  data-email="${emp.email}"
+                  data-phone="${emp.phone}"
+                  data-position="${emp.position}"
+                  onclick="openEditModal(this)">Edit</button>
+
+                <form action="/delete/${emp.id}" method="POST" style="display:inline;" onsubmit="return confirm('คุณแน่ใจหรือไม่ที่จะลบ?');">
+                  <button type="submit" class="btn-delete">Delete</button>
+                </form>
+              </td>
+            </tr>
+          `;
         });
       }
     </script>
-
 
 </body>
 <!-- Modal แก้ไข -->
