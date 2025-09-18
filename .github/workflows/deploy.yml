@@ -3,7 +3,7 @@ name: Deploy to Render
 on:
   push:
     branches:
-      - master   # หรือเปลี่ยนเป็น branch ที่คุณใช้จริง
+      - master
 
 jobs:
   deploy:
