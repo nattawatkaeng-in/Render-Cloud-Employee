@@ -1,0 +1,18 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - master   # หรือเปลี่ยนเป็น branch ที่คุณใช้จริง
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Trigger Render Deploy Hook
+        run: |
+          curl -X POST "https://api.render.com/deploy/srv-d2juinje5dus738ituh0?key=s8vE47dAz3I"
